@@ -1,0 +1,21 @@
+--- init.orig	2021-02-25 19:44:32.000000000 +0600
++++ init	2021-04-15 23:22:48.563345972 +0600
+@@ -48,6 +48,8 @@
+ 	exec env HAS_CTTY=Yes setsid cttyhack /bin/sh "$0" "$@"
+ fi
+ 
++/anim &
++
+ # now running under a controlling tty; debug output from stderr into log file
+ # boot up Android
+ 
+@@ -228,6 +230,9 @@
+ # return 1 if it wants to use auto_detect
+ [ "$AUTO" != "1" ] && detect_hardware && FOUND=1
+ 
++# Kill early_anim if required
++test -n "$INSTALL" || test -n "$ALWAYSRECOVERY" || test -z "$NORECOVERY" && kill -9 `ps -w | grep -v grep | grep anim | awk '{print $2}'`
++
+ [ -n "$INSTALL" ] && do_install
+ 
+ load_modules
