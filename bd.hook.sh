@@ -49,7 +49,7 @@
 
 # Patch init script
 _patches_dir="$HOOK_DIR/patches"
-_bin_name="early-bootanim-android-x86_alt"
+_bin_name="early-bootanim-android-x86"
 patch --no-backup "$INITIAL_RAMDISK_MOUNT_DIR/init" < "$_patches_dir/initrd.img_init.patch";
 rsync -a "$HOOK_DIR/$_bin_name" "$INITIAL_RAMDISK_MOUNT_DIR/anim" && chmod 755 "$INITIAL_RAMDISK_MOUNT_DIR/anim";
 log::info "Successfully patched initrd.img/init script for early-bootanim"
